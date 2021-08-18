@@ -70,9 +70,10 @@ function game() {
     let computerScore = 0;
     let humanSelection;
     let computerSelection;
-    while (humanScore <= 3 || computerScore <=3) {
+
+    while (humanScore < 3 && computerScore < 3) {
         humanSelection = prompt('Enter your move (rock/paper/scissor): ');
-        computerSelection = computerPlay;
+        computerSelection = computerPlay();
         humanOutcome = versus(humanSelection, computerSelection);
         if (humanOutcome === 'win') {
             humanScore += 1;
@@ -82,19 +83,12 @@ function game() {
             computerScore += 1;
             console.log('Score: Human: ' + humanScore + " Computer: " + computerScore);
         }
+    }
     
     if (humanScore === 3) {
         console.log("You won the game with a score of " + humanScore + " to " + computerScore);
-    }
+        }
     else {
         console.log("You loss the game with a score of " + humanScore + " to " + computerScore);
     }
-    }
-
-
-
-
-
-
-
 }
