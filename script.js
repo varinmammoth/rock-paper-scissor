@@ -1,3 +1,39 @@
+const playerChoiceDisplay = document.querySelector('.playerChoiceDisplay')
+
+const btn = document.querySelectorAll('.btn');
+
+const rockBtn = document.querySelector('#rockBtn');
+const paperBtn = document.querySelector('#paperBtn');
+const scissorBtn = document.querySelector('#scissorBtn');
+
+btn.forEach((button) => {
+    button.addEventListener('mouseover', () => {
+        button.setAttribute('class', 'btnActive')
+        if (button.idList.contains("rockBtn")) {
+            console.log('rock');
+        }
+    })
+    button.addEventListener('mouseout', () => {
+        button.setAttribute('class', 'btn')
+    })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function computerPlay() {
     let random_num = Math.random() *3;
     let output;
