@@ -1,4 +1,17 @@
-' use strict '
+'use strict'
+
+//When the program starts, isPlaying is set to false. Press the play button to set isPlaying to true.
+//isPlaying == true means rock/paper/scissor buttons are active
+let isPlaying = false;
+let choiceSelected = false;
+let gameOver = false;
+let humanOutcome;
+
+let humanScore = 0;
+let computerScore = 0;
+let humanSelection;
+let computerSelection;
+let winningScore = 3;
 
 //Define nodes for script for the three human choice buttons.
 const btn = document.querySelectorAll('.btn');
@@ -13,10 +26,35 @@ const rockSrc = 'https://img.icons8.com/emoji/452/rock-emoji.png';
 const paperSrc = 'https://icons.iconarchive.com/icons/iconsmind/outline/512/Paper-icon.png';
 const scissorSrc = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Scissors_icon_black.svg/1024px-Scissors_icon_black.svg.png'
 
+//Resets the game.
+function resetGame () {
+    resetBtn.setAttribute('id', 'resetBtn');
+    playBtn.setAttribute('id', 'playBtn')
+    console.log('Game resetted');
+    isPlaying = false;
+    gameOver = false;
+    humanScore = 0;
+    computerScore = 0;
+    let humanScoreDisplayStr = 'Score: ' + humanScore;
+    humanScoreDisplay.innerHTML = humanScoreDisplayStr;
+}
+
+//Update winningScore when confirm button is pressed
+function setWinningScore() {
+    resetGame();
+    let userInputScore = document.querySelector('#userInputScore').value;
+    winningScore = parseInt(userInputScore);
+    console.log('Winning score updated to ', winningScore);
+}
+
+//Activates buttons. Hovering will result in the choice being displayed on top.
+//Buttons are playable.
+
 //Script for three human choice buttons.
 btn.forEach((button) => {
     //Change button style to btnActive and
     //display images in the playerChoiceDisplay when mouseover button.
+    //Only works when gameover=false
     button.addEventListener('mouseover', () => {
         button.setAttribute('class', 'btnActive')
         switch(button.id) {
@@ -40,7 +78,7 @@ btn.forEach((button) => {
         button.setAttribute('class', 'btn')
         playerChoiceDisplay.removeChild(playerChoiceImg);
     })
-
+        
     //If isPlaying==True, pressing buttons will change humanSelection accordingly.
     button.addEventListener('click', () => {
         if (isPlaying) {
@@ -86,14 +124,32 @@ btn.forEach((button) => {
             let humanScoreDisplayStr = 'Score: ' + humanScore;
             humanScoreDisplay.innerHTML = humanScoreDisplayStr;   
         }
+        if (humanScore == winningScore) {
+            console.log('human won');
+            let msg = document.querySelector('#msg');
+            msg.innerHTML = '<h2>You won! Reset and play again.</h2>'
+            isPlaying = false;
+            gameOver = true;
+        }
+        else if (computerScore == winningScore) {
+            console.log('computer won');
+            let msg = document.querySelector('#msg');
+            msg.innerHTML = '<h2>You lost! Reset and play again.</h2>'
+            isPlaying = false;
+            gameOver = true;
+        }
     })
 })
+
+
+//Deactivate buttons. Hovering will still change button style, but no longer displays on top.
+//buttons are not playable.
+
 
 //Score display variables
 let humanScoreDisplay = document.querySelector('#humanScoreDisplay');
 
-
-//Computer makes a random choice.
+//Computer makes a random choice. Returns 'Rock' 'Paper' or 'Scissor'
 function computerPlay() {
     let random_num = Math.random() *3;
     let output;
@@ -109,6 +165,7 @@ function computerPlay() {
     return output;
 }
 
+//Compete. Returns humanOutcome = 'win' or 'loss' or 'tie'
 function versus(humanSelection, computerSelection) {
     humanSelection = humanSelection.toUpperCase();
     computerSelection = computerSelection.toUpperCase();
@@ -161,19 +218,7 @@ function versus(humanSelection, computerSelection) {
     }
 }
 
-//When the program starts, isPlaying is set to false. Press the play button to set isPlaying to true.
-//isPlaying == true means rock/paper/scissor buttons are active
-let isPlaying = false;
-let choiceSelected = false;
-let humanOutcome;
-
-let humanScore = 0;
-let computerScore = 0;
-let humanSelection;
-let computerSelection;
-const rock = 'rock';
-
-
+//Plays the game. (Combined the above two functions.) Returns humanOutcome = 'win' or 'loss' or 'tie'
 function game() {
     computerSelection = computerPlay();
     humanOutcome = versus(humanSelection, computerSelection);
@@ -188,15 +233,12 @@ const resetBtn = document.querySelector('#resetBtn')
 
 playBtn.addEventListener('click', () => {
     console.log('Play pressed.')
+    playBtn.setAttribute('id', 'playBtnInactive');
     isPlaying = true;
     resetBtn.setAttribute('id', 'resetBtnActive');
     resetBtn.addEventListener('click', () => {
-        if (isPlaying == true) {
-            resetBtn.setAttribute('id', 'resetBtn');
-            console.log('Game resetted');
-            isPlaying = false;
-            humanScore = 0;
-            computerScore = 0;
+        if (isPlaying == true || gameOver == true) {
+            resetGame()   
         }
     })
 })
