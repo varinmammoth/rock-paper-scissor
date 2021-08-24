@@ -4,6 +4,21 @@
     height: 200px;
 }
 
+#playBtn {
+    border: solid;
+}
+
+#resetBtn {
+    border: solid;
+    background-color: grey;
+}
+
+#resetBtnActive {
+    border: solid;
+    background-color: indianred;
+    cursor: pointer;
+}
+
 #main {
     display: flex;
     flex-direction: row;
@@ -26,11 +41,21 @@
     align-items: center;
 }
 
-.choiceDisplay {
+.playerChoiceDisplay {
     border: solid;
     height: 350px;
     width: 350px;
     margin: 5px;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.playerChoiceDisplay img {
+    width: 60%;
+    height: 60%;
 }
 
 .btnContainer {
@@ -70,12 +95,75 @@
     transform: scale(1.1);
 }
 
+.btnPressed {
+    width: 100px;
+    height: 100px;
+    margin: 2.5px 2.5px 2.5px 2.5px;
+    border: solid;
+    border-color:rgb(70, 70, 77);
+    background-color: rgb(196, 191, 191);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    transform: scale(1.15);
+}
+
+.btnPressedWin {
+    width: 100px;
+    height: 100px;
+    margin: 2.5px 2.5px 2.5px 2.5px;
+    border: solid;
+    border-color:rgb(105, 205, 92);
+    background-color: rgb(176, 233, 153);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    transform: scale(1.15);
+}
+
+.btnPressedLoss {
+    width: 100px;
+    height: 100px;
+    margin: 2.5px 2.5px 2.5px 2.5px;
+    border: solid;
+    border-color:indianred;
+    background-color: rgb(204, 73, 73);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    transform: scale(1.15);
+}
+
 .btn img {
     max-width:50%;
     max-height:50%;
 }
 
 .btnActive img {
+    max-width:50%;
+    max-height:50%;
+}
+
+.btnPressed img {
+    max-width:50%;
+    max-height:50%;
+}
+
+.btnPressedWin img {
+    max-width:50%;
+    max-height:50%;
+}
+
+.btnPressedLoss img {
     max-width:50%;
     max-height:50%;
 }
