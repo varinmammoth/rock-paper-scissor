@@ -3,25 +3,29 @@
     <head>
         <script src="script.js" defer></script>
         <link rel="stylesheet" href="style.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">  
     </head>
 
     <body>
-        <h1>Rock paper scissor game</h1>
+        <h1 id='webTitle'>Rock paper scissor game.</h1>
         <div id='scoreAndInstruction'>
             <div id='playBtn'><h2>Play</h2></div>
             <div id='resetBtn'><h2>Reset</h2></div>
-            <div id='userInput'>
-                <h2 style='max-width: 120px; margin-right: 5px;'>First to: </h2>
+            <div id='userInput' style='margin: 0px 40px 0px 40px;'>
+                <h2 id='userInputText'>First to: </h2>
                 <input type='int' id='userInputScore' value='3'>
-                <button onclick='setWinningScore()'>Confirm</button>
-            </div>
-            <div id='msg'>
-                <h2>Click 'Play' to play now!</h2>
+                <button class='confirmBtn' onclick='setWinningScore()'>Confirm</button>
             </div>
         </div>
-        
+
         <div id='main'>
             <div class='playArea'>
+                <div id='msg'>
+                    First to 3. Press PLAY!
+                </div>
                 <div class='scoreDisplay' id='humanScoreDisplay'>Score: 0</div>
                 <div class='playerChoiceDisplay'></div>
                 <div class='btnContainer'>
@@ -36,7 +40,15 @@
                     </div>
                 </div>
             </div>
-            <div class='playArea'>
+
+            <div id='aboutContainer'>
+                <div id='about'>
+                    <h3>About</h3>
+                    <p>>Rock paper scissor game.</p>
+                    <p>>Made by Mammoth. August 2021.</p>
+                    <p>>Github: <a target="_blank" style='color: black' href='https://github.com/varinmammoth/rock-paper-scissor'>varinmammoth</a></p>
+                    <p>>First Javascript project.</p>
+                </div>
 
             </div>
         </div>

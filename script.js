@@ -13,6 +13,9 @@ let humanSelection;
 let computerSelection;
 let winningScore = 3;
 
+let msg = document.querySelector('#msg');
+msg.setAttribute('id', 'msg');
+
 //Define nodes for script for the three human choice buttons.
 const btn = document.querySelectorAll('.btn');
 const rockBtn = document.querySelector('#rockBtn');
@@ -37,6 +40,8 @@ function resetGame () {
     computerScore = 0;
     let humanScoreDisplayStr = 'Score: ' + humanScore;
     humanScoreDisplay.innerHTML = humanScoreDisplayStr;
+    let updateMsg = 'First to ' + winningScore +'. Press PLAY!'
+    msg.textContent = updateMsg;
 }
 
 //Update winningScore when confirm button is pressed
@@ -45,6 +50,8 @@ function setWinningScore() {
     let userInputScore = document.querySelector('#userInputScore').value;
     winningScore = parseInt(userInputScore);
     console.log('Winning score updated to ', winningScore);
+    let updateMsg = 'First to ' + winningScore +'. Press PLAY!'
+    msg.textContent = updateMsg;
 }
 
 //Activates buttons. Hovering will result in the choice being displayed on top.
@@ -98,7 +105,7 @@ btn.forEach((button) => {
             }
             if (humanOutcome == 'win') {
                 button.setAttribute('class', 'btnPressedWin');
-                playerChoiceDisplay.setAttribute('style', 'background-color: green;')
+                playerChoiceDisplay.setAttribute('style', 'background-color: rgb(176, 233, 153);')
                 setTimeout( () => {
                     button.setAttribute('class', 'btn')
                     playerChoiceDisplay.setAttribute('style', 'background-color: none;')
@@ -106,7 +113,7 @@ btn.forEach((button) => {
                 humanScore += 1; }
             else if (humanOutcome == 'loss') {
                 button.setAttribute('class', 'btnPressedLoss');
-                playerChoiceDisplay.setAttribute('style', 'background-color: red;')
+                playerChoiceDisplay.setAttribute('style', 'background-color: rgb(204, 73, 73);')
                 setTimeout( () => {
                     button.setAttribute('class', 'btn')
                     playerChoiceDisplay.setAttribute('style', 'background-color: none;')
@@ -115,36 +122,29 @@ btn.forEach((button) => {
             }
             else {
                 button.setAttribute('class', 'btnPressed');
-                playerChoiceDisplay.setAttribute('style', 'background-color: grey;')
+                playerChoiceDisplay.setAttribute('style', 'background-color: rgb(196, 191, 191);')
                 setTimeout( () => {
                     button.setAttribute('class', 'btn')
                     playerChoiceDisplay.setAttribute('style', 'background-color: none;')
                 }, 200);
             }
             let humanScoreDisplayStr = 'Score: ' + humanScore;
-            humanScoreDisplay.innerHTML = humanScoreDisplayStr;   
+            humanScoreDisplay.textContent = humanScoreDisplayStr;   
         }
         if (humanScore == winningScore) {
             console.log('human won');
-            let msg = document.querySelector('#msg');
-            msg.innerHTML = '<h2>You won! Reset and play again.</h2>'
+            msg.textContent = 'You won! Reset and play again.'
             isPlaying = false;
             gameOver = true;
         }
         else if (computerScore == winningScore) {
             console.log('computer won');
-            let msg = document.querySelector('#msg');
-            msg.innerHTML = '<h2>You lost! Reset and play again.</h2>'
+            msg.textContent = 'You lost! Reset and play again.'
             isPlaying = false;
             gameOver = true;
         }
     })
 })
-
-
-//Deactivate buttons. Hovering will still change button style, but no longer displays on top.
-//buttons are not playable.
-
 
 //Score display variables
 let humanScoreDisplay = document.querySelector('#humanScoreDisplay');
@@ -233,6 +233,7 @@ const resetBtn = document.querySelector('#resetBtn')
 
 playBtn.addEventListener('click', () => {
     console.log('Play pressed.')
+    msg.textContent = 'In-game.';
     playBtn.setAttribute('id', 'playBtnInactive');
     isPlaying = true;
     resetBtn.setAttribute('id', 'resetBtnActive');
